@@ -1,6 +1,7 @@
 module Main exposing (main)
 
 import Platform exposing (worker)
+import Task
 
 
 type alias Flags =
@@ -12,23 +13,23 @@ type alias Model =
 
 
 type Msg
-    = Initialized
+    = Initialized String
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
-        Initialized ->
+        Initialized txt ->
             let
                 _ =
-                    Debug.log "Initialized program" "Hello World!"
+                    Debug.log "Initialized program" txt
             in
             ( model, Cmd.none )
 
 
-init : Flags -> ( Model, Cmd msg )
+init : Flags -> ( Model, Cmd Msg )
 init flags =
-    ( "initialized", Cmd.none )
+    ( "initialized", Task.perform Initialized (Task.succeed "Hello World!") )
 
 
 main =
