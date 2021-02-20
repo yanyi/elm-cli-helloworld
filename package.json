@@ -1,0 +1,11 @@
+{
+  "name": "elm-cli-helloworld",
+  "version": "1.0.0",
+  "description": "A Hello World CLI written in Elm",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Yan Yi Goh",
+  "license": "ISC"
+}
