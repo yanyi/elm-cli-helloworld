@@ -1,4 +1,4 @@
-module Main exposing (main)
+port module Main exposing (main)
 
 import Platform exposing (worker)
 import Task
@@ -20,11 +20,8 @@ update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
         Initialized txt ->
-            let
-                _ =
-                    Debug.log "Initialized program" txt
-            in
-            ( model, Cmd.none )
+            -- Send the `log` port on Initialized. See index.js.
+            ( model, log ("Initialized program: " ++ txt) )
 
 
 init : Flags -> ( Model, Cmd Msg )
@@ -44,6 +41,9 @@ main =
 ---
 
 
-subscriptions : Model -> Sub Msg
+subscriptions : Model -> Sub msg
 subscriptions model =
     Sub.none
+
+
+port log : String -> Cmd msg
